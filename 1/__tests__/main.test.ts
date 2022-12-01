@@ -2248,9 +2248,11 @@ describe('convertPuzzleInputFromStringToArray', () => {
 });
 
 describe('calorie counter', () => {
+
+  const testLoad = [[1000,2000,3000],[4000],[5000,6000],[7000,8000,9000],[10000]];
+  
   describe('simple counter function', () => {
     it('should return the total calories for the elf with the most calories', () => {
-      const testLoad = [[1000,2000,3000],[4000],[5000,6000],[7000,8000,9000],[10000]];
       expect(simpleCounter(testLoad)).toBe(24000);
     });
 
@@ -2261,7 +2263,6 @@ describe('calorie counter', () => {
 
   describe('combined counter function', () => {
     it('should return the total calories for three elves with the most calories', () => {
-      const testLoad = [[1000,2000,3000],[4000],[5000,6000],[7000,8000,9000],[10000]];
       expect(combinedCounter(testLoad)).toBe(45000);
     });
 
