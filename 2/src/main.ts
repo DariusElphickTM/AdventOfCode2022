@@ -33,4 +33,39 @@ const getStrategyScore = (strategy: Array<Array<string>>): number => {
     );
 };
 
-export { getRoundResult, getStrategyScore };
+const correctScoreMap = {
+    'X': {
+        'base': 0,
+        'A': 3,
+        'B': 1,
+        'C': 2
+    },
+    'Y': {
+        'base': 3,
+        'A': 1,
+        'B': 2,
+        'C': 3
+    },
+    'Z': {
+        'base': 6,
+        'A': 2,
+        'B': 3,
+        'C': 1
+    }
+};
+
+const getCorrectRoundResult = (round: Array<string>): number => {
+    const roundScores = correctScoreMap[round[1]];
+    return roundScores.base + roundScores[round[0]];
+};
+
+const getCorrectStrategyScore = (strategy: Array<Array<string>>): number => {
+    return strategy.reduce(
+        (accumilatedScore, currentRound) => {
+            return accumilatedScore + getCorrectRoundResult(currentRound);
+        }, 
+        0
+    );
+};
+
+export { getRoundResult, getStrategyScore, getCorrectRoundResult, getCorrectStrategyScore };
