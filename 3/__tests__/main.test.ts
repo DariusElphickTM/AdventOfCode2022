@@ -397,7 +397,7 @@ describe('getGroupedPrioritySum', () => {
   });
 
   it('should return grouped priority sum for the puzzle input', () => {
-    console.log(getGroupedPrioritySum(convertTestInputToArrayOfBags(testInput)));
-    //expect(getGroupedPrioritySum(convertTestInputToArrayOfBags(testInput))).toBe(8394);
+    console.log(getGroupedPrioritySum(convertTestInputToArrayOfBags(puzzleInput)));
+    expect(getGroupedPrioritySum(convertTestInputToArrayOfBags(puzzleInput))).toBe(2413);
   });
 });

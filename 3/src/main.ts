@@ -23,12 +23,30 @@ const getPrioritySum = (bags: Array<string>): number => {
     );
 };
 
+const groupTheElves = (bags: Array<string>): Array<Array<string>> => {
+    const groups = [];
+    for(let i = 3; i <= bags.length; i += 3) {
+        groups.push(bags.slice(i - 3, i));
+    };
+    return groups;
+};
+
+const getDuplicateAmongElves = (group: Array<string>): string => {
+    for(let i = 0; i < group[0].length; i ++) {
+        const currentItem = group[0][i];
+        if(group[1].includes(currentItem) && group[2].includes(currentItem)) {
+            return currentItem;
+        }
+    }
+    return '';
+}
+
 const getGroupedPrioritySum = (bags: Array<string>): number => {
-    return bags.reduce(
-        (prioritySum, currentBag) => {
+    return groupTheElves(bags).reduce(
+        (prioritySum, currentGroup) => {
             return prioritySum + getPriorityForItem(
-                getDuplicateBagContent(currentBag)
-                );
+                getDuplicateAmongElves(currentGroup)
+            );
         }, 
         0
     );
