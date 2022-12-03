@@ -1,5 +1,10 @@
-const getDuplicateBagContent = (bag: Array<string>): string => {
-    return bag[0].match(new RegExp('[' + bag[1] + ']'))[0];
+const getDuplicateBagContent = (bag: string): string => {
+    const middleIndex = bag.length / 2;
+    const bagPockets = [
+        bag.slice(0, middleIndex), 
+        bag.slice(middleIndex)
+    ];
+    return bagPockets[0].match(new RegExp('[' + bagPockets[1] + ']'))[0];
 }
 
 const getPriorityForItem = (item: string): number => {
@@ -7,8 +12,8 @@ const getPriorityForItem = (item: string): number => {
     return itemCharCode > 96 ? itemCharCode - 96 : itemCharCode - 38;
 };
 
-const getPrioritySum = (bagContents: Array<Array<string>>): number => {
-    return bagContents.reduce(
+const getPrioritySum = (bags: Array<string>): number => {
+    return bags.reduce(
         (prioritySum, currentBag) => {
             return prioritySum + getPriorityForItem(
                 getDuplicateBagContent(currentBag)
@@ -18,4 +23,15 @@ const getPrioritySum = (bagContents: Array<Array<string>>): number => {
     );
 };
 
-export { getPrioritySum, getPriorityForItem, getDuplicateBagContent };
+const getGroupedPrioritySum = (bags: Array<string>): number => {
+    return bags.reduce(
+        (prioritySum, currentBag) => {
+            return prioritySum + getPriorityForItem(
+                getDuplicateBagContent(currentBag)
+                );
+        }, 
+        0
+    );
+};
+
+export { getPrioritySum, getGroupedPrioritySum, getPriorityForItem, getDuplicateBagContent };

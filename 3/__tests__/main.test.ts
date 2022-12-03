@@ -1,4 +1,4 @@
-import { getPrioritySum, getDuplicateBagContent, getPriorityForItem } from '../src/main.js';
+import { getPrioritySum, getGroupedPrioritySum, getDuplicateBagContent, getPriorityForItem } from '../src/main.js';
 
 const testInput = `vJrwpWtwJgWrhcsFMMfFFhFp
 jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
@@ -308,43 +308,19 @@ dzgBwzlgrrBrVLLlwLBgBlgRScDMMDDswMsHZRGDsZGZmM
 HPfPbjCFJjCvfnnsjsDDcccmZsRSMc
 hCvHfWPPnvJhPWpqNNhqLqzLqLLd`;
 
-const convertTestInputToArrayOfBags = (input: string): Array<Array<string>> => {
-  return input.split('\n').map((currentBagContents) => {
-    const middleIndex = currentBagContents.length / 2;
-    return [
-      currentBagContents.slice(0, middleIndex), 
-      currentBagContents.slice(middleIndex)
-    ]
-  });
-}
+const convertTestInputToArrayOfBags = (input: string): Array<string> => {
+  return input.split('\n');
+};
 
 describe('convertTestInputToArrayOfBags', () => {
   it('should convert the test input into an array of compartmentalised bags', () => {
     const expectedOutput = [
-      [
-        'vJrwpWtwJgWr',
-        'hcsFMMfFFhFp'
-      ],
-      [
-        'jqHRNqRjqzjGDLGL',
-        'rsFMfFZSrLrFZsSL'
-      ],
-      [
-        'PmmdzqPrV',
-        'vPwwTWBwg'
-      ],
-      [
-        'wMqvLMZHhHMvwLH',
-        'jbvcjnnSBnvTQFn'
-      ],
-      [
-        'ttgJtRGJ',
-        'QctTZtZT'
-      ],
-      [
-        'CrZsJsPPZsGz',
-        'wwsLwLmpwMDw'
-      ]
+      'vJrwpWtwJgWrhcsFMMfFFhFp',
+      'jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL',
+      'PmmdzqPrVvPwwTWBwg',
+      'wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn',
+      'ttgJtRGJQctTZtZT',
+      'CrZsJsPPZsGzwwsLwLmpwMDw'
     ];
 
     expect(convertTestInputToArrayOfBags(testInput)).toEqual(expectedOutput);
@@ -412,5 +388,16 @@ describe('getPrioritySum', () => {
 
   it('should return priority sum for the puzzle input', () => {
     expect(getPrioritySum(convertTestInputToArrayOfBags(puzzleInput))).toBe(8394);
+  });
+});
+
+describe('getGroupedPrioritySum', () => {
+  it('should return grouped priority sum for the test input', () => {
+    expect(getGroupedPrioritySum(convertTestInputToArrayOfBags(testInput))).toBe(70);
+  });
+
+  it('should return grouped priority sum for the puzzle input', () => {
+    console.log(getGroupedPrioritySum(convertTestInputToArrayOfBags(testInput)));
+    //expect(getGroupedPrioritySum(convertTestInputToArrayOfBags(testInput))).toBe(8394);
   });
 });
