@@ -1,4 +1,4 @@
-import { getCrossOverRangeCount, isCrossOver } from '../src/main.js';
+import { getCrossOverRangeCount, getAnyCrossOverCount, isCrossOver, hasAnyCrossOver } from '../src/main.js';
 
 const testInput = `2-4,6-8
 2-3,4-5
@@ -1077,7 +1077,35 @@ describe('getCrossOverRangeCount', () => {
     expect(getCrossOverRangeCount(convertTestInputToArrayOfElfPairs(testInput))).toBe(2);
   });
 
-  it('should return the number of pairs with na range contained in the other for the puzzle input', () => {
+  it('should return the number of pairs with a range contained in the other for the puzzle input', () => {
     expect(getCrossOverRangeCount(convertTestInputToArrayOfElfPairs(puzzleInput))).toBe(602);
+  });
+});
+
+describe('hasAnyCrossOver', () => {
+  it('should return the correct answer for the test data', () => {
+    const expectedResults = [
+      false,
+      false,
+      true,
+      true,
+      true,
+      true
+    ];
+
+    convertTestInputToArrayOfElfPairs(testInput).forEach((currentPair, index) => {
+      expect(hasAnyCrossOver(currentPair)).toBe(expectedResults[index]);
+    });
+  });
+});
+
+describe('getAnyCrossOverCount', () => {
+  it('should return the number of pairs with any crossover for the test data', () => {
+    expect(getAnyCrossOverCount(convertTestInputToArrayOfElfPairs(testInput))).toBe(4);
+  });
+
+  it('should return the number of pairs with any crossover for the puzzle input', () => {
+    //console.log(getAnyCrossOverCount(convertTestInputToArrayOfElfPairs(puzzleInput)));
+    expect(getAnyCrossOverCount(convertTestInputToArrayOfElfPairs(puzzleInput))).toBe(891);
   });
 });
