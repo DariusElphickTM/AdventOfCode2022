@@ -1,4 +1,4 @@
-//import { helloWorld } from '../src/main.js';
+import { getTopBlocks } from '../src/main.js';
 
 const testInput = `    [D]    
 [N] [C]    
@@ -65,3 +65,11 @@ describe('getMovesFromInput', () => {
     expect(getMovesFromInput(testInput)).toEqual(expectedOutput);
   });
 });
+
+describe('moveBlocks', () => {
+  it('should move the blocks correctly for the test input', () => {
+    expect(getTopBlocks(getStacksFromInput(testInput), getMovesFromInput(testInput))).toEqual(
+      ['[C]', '[M]', '[Z]']
+    );
+  });
+})
