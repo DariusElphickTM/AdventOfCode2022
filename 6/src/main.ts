@@ -1,4 +1,4 @@
-const detectStartOfPacket = (buffer: string): number | null => {
+const detectStartOfPacket = (buffer: string, lengthOfPacket: number): number | null => {
     const bufferDetector = [];
     for(let i = 0; i < buffer.length; i++) {
         const currentLetter = buffer[i];
@@ -7,7 +7,7 @@ const detectStartOfPacket = (buffer: string): number | null => {
             bufferDetector.push(currentLetter);
         } else {
             bufferDetector.push(currentLetter);
-            if(bufferDetector.length == 4) {
+            if(bufferDetector.length == lengthOfPacket) {
                 return i + 1;
             }
         }
