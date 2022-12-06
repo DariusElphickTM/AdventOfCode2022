@@ -9,6 +9,19 @@ const getTopBlocks = (initialStacks: Array<Array<string>>, moves: Array<Array<nu
     return workingStacks.map((stack) => (stack.pop()));
 };
 
+const getTopBlocksFromThe9001 = (initialStacks: Array<Array<string>>, moves: Array<Array<number>>): Array<string> => {
+    const workingStacks = [...initialStacks];
+    moves.forEach(move => {
+        const moveBlocks = [];
+        for(let i = 0; i < move[0]; i++) {
+            moveBlocks.push(workingStacks[move[1] - 1].pop());
+        }
+        moveBlocks.reverse();
+        workingStacks[move[2] - 1] = workingStacks[move[2] - 1].concat(moveBlocks);
+    });
+    return workingStacks.map((stack) => (stack.pop()));
+};
+
 const getStacksFromInput = (input: string): Array<Array<string>> => {
     const inputArray = input.substring(0, input.indexOf('1') - 2).split('\n').reverse();
     const outputArray = [...inputArray[0].matchAll(new RegExp(/\[[A-Z]\]/, 'g'))].map(
@@ -40,4 +53,4 @@ const getStacksFromInput = (input: string): Array<Array<string>> => {
     )
   );
 
-export { getTopBlocks, getMovesFromInput, getStacksFromInput };
+export { getTopBlocks, getTopBlocksFromThe9001, getMovesFromInput, getStacksFromInput };

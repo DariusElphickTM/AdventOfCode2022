@@ -1,4 +1,4 @@
-import { getTopBlocks, getMovesFromInput, getStacksFromInput } from '../src/main.js';
+import { getTopBlocks, getTopBlocksFromThe9001, getMovesFromInput, getStacksFromInput } from '../src/main.js';
 
 const testInput = `    [D]    
 [N] [C]    
@@ -561,5 +561,26 @@ describe('moveBlocks', () => {
       '[N]', '[H]',
       '[L]'
     ]);
+  });
+
+  describe('moveBlocksWithThe9001', () => {
+    it('should move the blocks correctly for the test input', () => {
+      expect(getTopBlocksFromThe9001(getStacksFromInput(testInput), getMovesFromInput(testInput))).toEqual(
+        ['[M]', '[C]', '[D]']
+      );
+    });
+
+    it('should move the blocks correctly for the puzzle input', () => {
+      //console.log(getTopBlocksFromThe9001(getStacksFromInput(puzzleInput), getMovesFromInput(puzzleInput)));
+      expect(getTopBlocksFromThe9001(getStacksFromInput(puzzleInput), getMovesFromInput(puzzleInput))).toEqual(
+        [
+          '[J]', '[N]',
+          '[R]', '[S]',
+          '[C]', '[D]',
+          '[W]', '[P]',
+          '[P]'
+        ]
+      );
+    });
   });
 })
