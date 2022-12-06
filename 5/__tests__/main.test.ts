@@ -1,4 +1,4 @@
-import { getTopBlocks } from '../src/main.js';
+import { getTopBlocks, getMovesFromInput, getStacksFromInput } from '../src/main.js';
 
 const testInput = `    [D]    
 [N] [C]    
@@ -521,37 +521,6 @@ move 1 from 8 to 2
 move 10 from 3 to 4
 move 2 from 3 to 5
 move 1 from 3 to 1`;
-
-const getStacksFromInput = (input: string): Array<Array<string>> => {
-  const inputArray = input.substring(0, input.indexOf('1') - 2).split('\n').reverse();
-  const outputArray = [...inputArray[0].matchAll(new RegExp(/\[[A-Z]\]/, 'g'))].map(
-    (currentStack) => ([currentStack[0]])
-  );
-
-  for(let i = 1; i < inputArray.length; i++) {
-    const currentStackLevel = inputArray[i];
-    for(let j = 0; j * 4 < currentStackLevel.length; j += 1) {
-      const stringPosition = j * 4;
-      const isThereABlockHere = currentStackLevel.substring(stringPosition, stringPosition + 3).match(new RegExp(/\[[A-Z]\]/));
-      if(isThereABlockHere !== null) {
-        outputArray[j].push(isThereABlockHere[0]);
-      }
-    }
-  }
-  return outputArray;
-};
-
-const getMovesFromInput = (input: string): Array<Array<number>> => (
-  [...input.matchAll(new RegExp(/move \d+ from \d+ to \d+/, 'g'))].map(
-    (currentMove) => (
-      [...currentMove[0].matchAll(new RegExp(/\d+/, 'g'))].map(
-        (currentDigit) => (
-          +currentDigit[0]
-        )
-      )
-    )
-  )
-);
 
 describe('getStacksFromInput', () => {
   it('should return a set of stacks ad a data structure', () => {
