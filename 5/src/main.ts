@@ -3,7 +3,6 @@ const getTopBlocks = (initialStacks: Array<Array<string>>, moves: Array<Array<nu
     moves.forEach(move => {
         for(let i = 0; i < move[0]; i++) {
             const block = workingStacks[move[1] - 1].pop();
-            console.log(block);
             workingStacks[move[2] - 1].push(block);
         }
     });
